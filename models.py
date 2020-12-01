@@ -32,7 +32,7 @@ class Film(db.Model):
     last_update = db.Column(db.DateTime, default=datetime.datetime.now())
     special_features = db.ARRAY(db.String())
     film_actor = db.relationship('FilmActor', cascade="all,delete", backref='film', lazy=True)
-    list_film_actor = db.ARRAY(db.Integer)
+    film_actors = db.ARRAY(db.Integer)
 
     def __init__(self, title, description, release_year, language_id, rental_duration, rental_rate, length, replacement_cost, rating, special_features):
         self.title = title
@@ -63,7 +63,7 @@ class ActorSchema(ma.Schema):
 
 class FilmSchema(ma.Schema):
     class Meta:
-        fields = ("film_id", "title", "description", "release_year", "list_film_actor")
+        fields = ("film_id", "title", "description", "release_year", "film_actors")
         model = Film
 
 class FilmActorSchema(ma.Schema):

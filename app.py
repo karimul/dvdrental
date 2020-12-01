@@ -87,7 +87,7 @@ def remove_actor_by_id(_id):
 def get_film_by_id(_id):
     try:
         film = Film.query.filter_by(film_id=_id).first()
-        film.list_film_actor = [item.actor_id for item in film.film_actor]
+        film.film_actors = [item.actor_id for item in film.film_actor]
         return jsonify(film_schema.dump(film))
     except Exception as e:
         return jsonify(error=str(e))
